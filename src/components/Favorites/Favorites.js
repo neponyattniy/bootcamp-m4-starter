@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { removeFromFavourites } from '../../redux/action/actions';
 import './Favorites.css';
 
 
 const mapStateToProps = (state) => {
     return {
-      favorites: state.favorites,
+        favorites: state.favorites,
     };
-  };
+};
 
-
-  
-
-
+const mapDispatchToProps = (dispatch) => ({
+    removeFromFavourites: (id) => dispatch(removeFromFavourites(id)),
+});
 
 class Favorites extends Component {
-    render() { 
+    render() {
+        console.log(this.props.favorites)
         return (
             <div className="favorites">
                 <input placeholder="Новый список" className="favorites__name" />
                 <ul className="favorites__list">
                     {this.props.favorites.map((item) => {
-                        return <li key={item.imdbID}>{item.Title} ({item.Year}) <button className="deletefav" >X</button></li>;
+                        return <li key={item.imdbID}>{item.Title} ({item.Year})
+                        <button className="deletefav" onClick={() => { this.props.removeFromFavourites(item.imdbID) }}>X</button></li>;
                     })}
                 </ul>
                 <button type="button" className="favorites__save">Сохранить список</button>
@@ -29,5 +31,6 @@ class Favorites extends Component {
         );
     }
 }
- 
-export default connect(mapStateToProps)(Favorites);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

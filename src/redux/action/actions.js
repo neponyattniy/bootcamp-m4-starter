@@ -16,9 +16,9 @@ export function addToFavourites(id) {
     };
 }
 
-export function removeMovieFromFavourites(id) {
+export function removeFromFavourites(id) {
     return {
-        type: "REMOVE_MOVIE_FROM_FAVOURITES",
+        type: "REMOVE_FROM_FAVOURITES",
         payload: {
             id: id,
         },
