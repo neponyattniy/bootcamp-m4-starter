@@ -10,6 +10,10 @@ const mapStateToProps = (state) => {
   };
 
 
+  
+
+
+
 class Favorites extends Component {
     render() { 
         return (
@@ -17,7 +21,7 @@ class Favorites extends Component {
                 <input placeholder="Новый список" className="favorites__name" />
                 <ul className="favorites__list">
                     {this.props.favorites.map((item) => {
-                        return <li key={item.imdbID}>{item.Title} ({item.Year}) <button className="deletefav">X</button></li>;
+                        return <li key={item.imdbID}>{item.Title} ({item.Year}) <button className="deletefav" >X</button></li>;
                     })}
                 </ul>
                 <button type="button" className="favorites__save">Сохранить список</button>

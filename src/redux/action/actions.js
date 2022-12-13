@@ -15,3 +15,12 @@ export function addToFavourites(id) {
         },
     };
 }
+
+export function removeMovieFromFavourites(id) {
+    return {
+        type: "REMOVE_MOVIE_FROM_FAVOURITES",
+        payload: {
+            id: id,
+        },
+    };
+}
