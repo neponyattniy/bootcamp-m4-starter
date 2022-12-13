@@ -4,6 +4,15 @@
     padding: 30px 20px;
 }
 
+.deletefav {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    outline: 0;
+    border: 1px solid black;
+    background-image: linear-gradient(blue, rgb(255, 255, 255));
+}
+
 .favorites__name {
     box-sizing: border-box;
     width: 100%;
