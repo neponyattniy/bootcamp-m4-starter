@@ -11,10 +11,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    removeFromFavourites: (id) => dispatch(removeFromFavourites(id)),
-});
+    removeFromFavorites: (id) => dispatch(removeFromFavourites(id)),
+  });
 
 class Favorites extends Component {
+    
     render() {
         console.log(this.props.favorites)
         return (
