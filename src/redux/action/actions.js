@@ -6,3 +6,12 @@ export function addMovies(movie) {
         }
     }
 }
+
+export function addToFavourites(id) {
+    return {
+        type: "ADD_TO_FAVOURITES",
+        payload: {
+            id: id,
+        },
+    };
+}
