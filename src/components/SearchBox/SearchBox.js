@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import './SearchBox.css';
+import { addMovies } from '../../redux/action/actions';
+
+const mapDispatchToProps = (dispatch) => ({
+    addMovies: (data) => dispatch(addMovies(data)),
+});
 
 class SearchBox extends Component {
     state = {
@@ -10,6 +16,11 @@ class SearchBox extends Component {
     }
     searchBoxSubmitHandler = (e) => {
         e.preventDefault();
+        fetch(`https://www.omdbapi.com/?s=${this.state.searchLine}&apikey=7c7aeb5e`)
+            .then(res => res.json())
+            .then(data => {
+                this.props.addMovies(data.Search);
+            });
     }
     render() {
         const { searchLine } = this.state;
@@ -39,5 +50,5 @@ class SearchBox extends Component {
         );
     }
 }
- 
-export default SearchBox;
+
+export default connect(null, mapDispatchToProps)(SearchBox);
