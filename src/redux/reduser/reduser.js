@@ -4,7 +4,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-
+    let favorites = null;
     switch (action.type) {
         case "ADD_MOVIES":
             const movies = action.payload.movie
@@ -18,7 +18,7 @@ export default function reducer(state = initialState, action) {
             const newState = { ...state };
             const id = action.payload.id;
             const match = newState.movies.find((item) => item.imdbID === id);
-            let favorites = [...state.favorites, match];
+            favorites = [...state.favorites, match];
             return {
                 ...state,
                 favorites,
@@ -40,9 +40,5 @@ export default function reducer(state = initialState, action) {
               ...state,
               favorites,
             }; 
-            
-
     }
-
-
 }
