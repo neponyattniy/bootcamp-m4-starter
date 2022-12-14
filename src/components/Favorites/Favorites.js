@@ -30,8 +30,6 @@ class Favorites extends Component {
                     document.querySelector('.movie-item__add-button').disabled = false;
                     document.querySelector('.movie-item__add-button').style.backgroundColor = '#496DDB';
                     document.querySelector('.movie-item__add-button').innerText = "Добавить в список";
-
-
                   }}
                 >
                   X
