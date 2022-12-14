@@ -12,6 +12,15 @@ class MainPage extends Component {
                 <Header />
                 <main className="main-page__content">
                     <section className="main-page__main-section">
+                    <div className="main-page__search-box_mobile">
+                            <SearchBox />
+                        </div>
+                        <div className="main-page__movies_mobile">
+                            <Movies />
+                        </div>
+                    <aside className="main-page__favorites_mobile">
+                        <Favorites />
+                    </aside>
                         <div className="main-page__search-box">
                             <SearchBox />
                         </div>

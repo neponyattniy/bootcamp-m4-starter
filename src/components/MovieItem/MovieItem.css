@@ -7,6 +7,7 @@
 .movie-item__poster {
     height: 150px;
     margin-right: 21px;
+    max-width: 100px;
 }
 
 .movie-item__title {
