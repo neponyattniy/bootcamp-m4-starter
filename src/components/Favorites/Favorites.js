@@ -13,18 +13,6 @@ const mapDispatchToProps = (dispatch) => ({
   removeFromFavorites: (id) => dispatch(removeFromFavourites(id)),
 });
 
-const setDisable = () => {
-    if(document.querySelector('.favorites__name').value === '')
-    {
-        document.querySelector('.favorites__save').style.backgroundColor = 'red'
-        document.querySelector('.favorites__save').disabled = true
-    }
-}
-
-window.addEventListener('load', () =>{
-    setDisable()
-})
-
 class Favorites extends Component {
   render() {
     return (
