@@ -38,7 +38,7 @@ class Favorites extends Component {
       .catch((err) => console.log(err));
     document.querySelector(".favorites__save").textContent = "Идет запрос";
     setTimeout(() => {
-      document.querySelector(".favorites__save").remove();
+      document.querySelector(".favorites__save").remove()
       document.querySelector(".ssilka").style.display = 'block'
     }, 1000);
   }
