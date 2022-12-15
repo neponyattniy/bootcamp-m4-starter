@@ -7,10 +7,10 @@
 .deletefav {
     width: 20px;
     height: 20px;
-    border-radius: 4px;
+    border-radius: 20px;
     outline: 0;
     border: 1px solid black;
-    background-image: linear-gradient(rgb(115, 115, 188), rgb(112, 108, 165));
+    background-image: linear-gradient(blue, rgb(255, 255, 255));
 }
 
 .favorites__name {
@@ -41,3 +41,6 @@
     transition: all 0.2s linear;
 }
 
+.ssilka {
+    display: none;
+}

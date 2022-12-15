@@ -1,6 +1,8 @@
 const initialState = {
     favorites: [],
     movies: [],
+    id: null,
+    listArr: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -23,6 +25,16 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 favorites,
             }
+        case "SET_ID": 
+        return {
+            ...state,
+            id: action.payload.id,
+        }
+        case("MAKE_LIST"):
+                return{
+                    ...state,
+                    listArr: action.payload.data
+                }
         default:
             return state;
 
@@ -40,5 +52,6 @@ export default function reducer(state = initialState, action) {
               ...state,
               favorites,
             }; 
+        
     }
 }

@@ -24,3 +24,21 @@ export function removeFromFavourites(id) {
         },
     };
 }
+
+export function setId(id){
+    return{
+        type:"SET_ID",
+        payload:{
+            id: id
+        }
+    };
+}
+
+export function makeList(data) {
+    return {
+        type:"MAKE_LIST",
+        payload:{
+            data: data
+        }
+    }
+}
