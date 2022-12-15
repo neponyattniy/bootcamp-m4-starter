@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
 import MovieItem from '../MovieItem/MovieItem';
-import { connect } from "react-redux";
 import './Movies.css';
-
-const mapStateToProps = (state) => {
-    return {
-      movies: state.movies,
-    };
-  };
+import { connect } from 'react-redux';
+import { fetchFilms } from '../../redux/actions';
 
 class Movies extends Component {
 
     render() { 
-        if(this.props.movies.length === 0) 
-            return true;
-        
+        if (!this.props.movies) {
+            return (
+                <p>Ничего не найдено! Повторите попытку!</p>
+            )
+        } 
         return ( 
             <ul className="movies">
                 {this.props.movies.map((movie) => (
                     <li className="movies__item" key={movie.imdbID}>
-                        <MovieItem {...movie} />
+                        <MovieItem imdbID={movie.imdbID} title={movie.Title} poster={movie.Poster} year={movie.Year} />
                     </li>
                 ))}
             </ul>
         );
     }
 }
- 
-export default connect(mapStateToProps)(Movies);
+
+const mapStateToProps = (state) => {
+    return {
+        movies: state.movies, searchLine: state.searchLine, apiKey: state.apiKey, 
+    }
+ }
+
+ const mapDispatchToProps = dispatch => ({
+    fetchListFilms: (searchLine, apiKey) => dispatch(fetchFilms(searchLine, apiKey)),
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

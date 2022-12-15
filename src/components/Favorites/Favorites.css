@@ -4,15 +4,6 @@
     padding: 30px 20px;
 }
 
-.deletefav {
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    outline: 0;
-    border: 1px solid black;
-    background-image: linear-gradient(blue, rgb(255, 255, 255));
-}
-
 .favorites__name {
     box-sizing: border-box;
     width: 100%;
@@ -24,6 +15,21 @@
 
 .favorites__list {
     margin-bottom: 24px;
+}
+
+.favorite_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.removing_button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .favorites__save {
@@ -41,6 +47,15 @@
     transition: all 0.2s linear;
 }
 
-.ssilka {
-    display: none;
+.favorites__save:hover:not(:disabled) {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    background-color: #FFEEDB;
+    color: rgba(0, 8, 7);
+}
+
+.favorites__save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

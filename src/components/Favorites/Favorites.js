@@ -1,87 +1,69 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { setId, removeFromFavourites } from "../../redux/action/actions";
-import "./Favorites.css";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import './Favorites.css';
+import { connect } from 'react-redux';
+import { changingFavoritesTitle, putFavoritesListToServer, removingFilm } from '../../redux/actions';
 
-const mapStateToProps = (state) => {
-  return {
-    favorites: state.favorites,
-    idPost: state.id,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  removeFromFavorites: (id) => dispatch(removeFromFavourites(id)),
-  setId: (id) => dispatch(setId(id)),
-});
 
 class Favorites extends Component {
-  clickHandler() {
-    let list = {
-      title: document.querySelector(".favorites__name").value,
-      movies: this.props.favorites,
-    };
 
-    fetch("https://acb-api.algoritmika.org/api/movies/list/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(list),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.id);
-        this.props.setId(data.id);
-      })
-      .catch((err) => console.log(err));
-    document.querySelector(".favorites__save").textContent = "Идет запрос";
-    setTimeout(() => {
-      document.querySelector(".favorites__save").remove()
-      document.querySelector(".ssilka").style.display = 'block'
-    }, 1000);
-  }
+    saveListHandler = (event) => {
+        event.preventDefault();
+        this.props.savingList(this.props.favoritesTitle, this.props.favoritesMovies)
+    }
 
-  render() {
-    console.log(this.props.favorites);
+    changeTitleHandler = (event) => {
+        this.props.changingTitle(event.target.value)
+    }
 
-    return (
-      <div className="favorites">
-        <input placeholder="Новый список" className="favorites__name" />
-        <ul className="favorites__list">
-          {this.props.favorites.map((item) => {
-            return (
-              <li key={item.imdbID}>
-                {item.Title} ({item.Year})
-                <button
-                  className="deletefav"
-                  onClick={() => {
-                    this.props.removeFromFavorites(item.imdbID);
-                  }}
-                >
-                  X
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        <button
-          type="button"
-          className="favorites__save"
-          onClick={() => {
-            this.clickHandler();
+    removeFilmHandler = (event) => {
+        console.log(event.target.dataset)
+        this.props.removeFilm(event.target.dataset.id)
+    }
 
-          }}
-        >
-          Сохранить список
-        </button>
-        <Link className="ssilka" to={`/list/${this.props.idPost}`}>
-          Перейти к списку
-        </Link>
-      </div>
-    );
-  }
+    render() { 
+        return (
+            <div className="favorites">
+                <input value={this.props.favoritesTitle} 
+                className="favorites__name" 
+                disabled={this.props.idList}
+                 onChange={this.changeTitleHandler} />
+                <ul className="favorites__list">
+                    {this.props.favoritesMovies.map((item) => {
+                        return <li className="favorite_item"
+                         key={item.imdbID} >{item.title} ({item.year}) 
+                         {!this.props.idList && <button className="removing_button" data-id={item.imdbID}
+                          onClick={this.removeFilmHandler}>
+                            X
+                            </button>}</li>;
+                    })}
+                </ul>
+                {!this.props.idList && <button type="button"
+                 className="favorites__save"
+                  disabled={!this.props.favoritesTitle || !this.props.favoritesMovies}
+                   onClick={this.saveListHandler} >
+                    Сохранить список
+                    </button>} 
+                {this.props.idList && <a href={`/list/${this.props.idList}`} target="_blank" >Перейти к списку</a>} 
+
+            </div>
+        );
+    }
 }
+ 
+const mapStateToProps = (state) => {
+    return {
+        favoritesTitle: state.favoritesTitle,
+        favoritesMovies: state.favoritesMovies,
+        idList: state.idList,
+    }
+ }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+ const mapDispatchToProps = (dispatch) => ({
+    changingTitle: (favoritesTitle) => dispatch(changingFavoritesTitle(favoritesTitle)),
+    savingList: (favoritesTitle, favoritesMovies) => dispatch(putFavoritesListToServer(favoritesTitle, favoritesMovies)),
+    removeFilm: (favoritesMovies => dispatch(removingFilm(favoritesMovies))),
+ })
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+  
